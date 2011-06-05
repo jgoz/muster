@@ -20,7 +20,7 @@
 
 			service.OnStart(args);
 
-			while (state == ServiceState.Running)
+			while (state != ServiceState.Stopped)
 			{
 				Console.WriteLine("Currently {0}. [Q]uit, [P]ause, [R]esume: ", state);
 				TryHandleConsoleInput(service, Console.ReadKey().Key, ref state);
