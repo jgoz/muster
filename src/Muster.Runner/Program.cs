@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Linq;
 	using System.Reflection;
 	using System.ServiceProcess;
@@ -127,9 +128,11 @@
 			{
 				try
 				{
-					Assembly assembly = Assembly.LoadFile(assemblyPath);
+					Assembly assembly = Assembly.LoadFile(Path.GetFullPath(assemblyPath));
 
-					var serviceTypes = assembly.GetExportedTypes().Where(t => t.GetInterfaces().Contains(typeof(IWindowsService)));
+					var serviceTypes = assembly.GetExportedTypes()
+						.Where(t => t.GetInterfaces().Contains(typeof(IWindowsService)))
+						.Where(t => t.IsClass && !t.IsAbstract);
 
 					if (!serviceTypes.Any())
 						Die("Unable to find IWindowsService implementors in assembly " + assemblyPath);
