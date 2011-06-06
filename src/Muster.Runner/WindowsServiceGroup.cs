@@ -5,14 +5,16 @@
 
 	public class WindowsServiceGroup : IWindowsService
 	{
-		private readonly IEnumerable<IWindowsService> _services;
+		private readonly List<IWindowsService> _services;
 
-		public WindowsServiceGroup(IEnumerable<IWindowsService> services)
+		public WindowsServiceGroup()
 		{
-			if (services == null)
-				throw new ArgumentNullException("services");
+			_services = new List<IWindowsService>();
+		}
 
-			_services = services;
+		public void Add(IWindowsService service)
+		{
+			_services.Add(service);
 		}
 
 		public void Dispose()

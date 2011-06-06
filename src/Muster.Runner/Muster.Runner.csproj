@@ -68,6 +68,7 @@
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServiceRunner.cs" />
     <Compile Include="WindowsServiceGroup.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />

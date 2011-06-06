@@ -6,7 +6,7 @@
 	{
 		public void OnStart(string[] args)
 		{
-			Console.WriteLine("We are starting.");
+			Console.WriteLine("We are starting in {0}.", AppDomain.CurrentDomain.FriendlyName);
 		}
 
 		public void OnStop()
