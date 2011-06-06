@@ -3,9 +3,10 @@
 	using System;
 	using System.Configuration;
 
+	[WindowsService("TestService")]
 	public class TestService : IWindowsService
 	{
-		public void OnStart(string[] args)
+		public void OnStart(String[] args)
 		{
 			Console.WriteLine("We are starting in {0}. SomeText: {1}", AppDomain.CurrentDomain.FriendlyName, ConfigurationManager.AppSettings["SomeText"]);
 		}
