@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ServiceRunner.cs" />
+    <Compile Include="TypeCollector.cs" />
     <Compile Include="WindowsServiceGroup.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />

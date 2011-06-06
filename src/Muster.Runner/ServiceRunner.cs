@@ -2,8 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.IO;
-	using System.Linq;
 	using System.Reflection;
 	using System.ServiceProcess;
 
@@ -11,12 +9,14 @@
 	{
 		public ServiceRunner()
 		{
-			AppDomain.CurrentDomain.AssemblyResolve += CurrentDomainAssemblyResolve;
+			AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => Assembly.Load(args.Name);
 		}
 
 		public void InstallServices(IEnumerable<String> assemblies, IEnumerable<String> typeNames)
 		{
-			foreach (var type in CollectServiceTypes(assemblies, typeNames))
+			var typeCollector = new TypeCollector(assemblies, typeNames);
+
+			foreach (var type in typeCollector.CollectConcreteTypes<IWindowsService>())
 			{
 				Console.WriteLine("Installing {0} from assembly {1}...", type.Name, type.Assembly.FullName);
 				WindowsServiceInstaller.RuntimeInstall(type.Assembly, type);
@@ -25,7 +25,9 @@
 
 		public void UninstallServices(IEnumerable<String> assemblies, IEnumerable<String> typeNames)
 		{
-			foreach (var type in CollectServiceTypes(assemblies, typeNames))
+			var typeCollector = new TypeCollector(assemblies, typeNames);
+
+			foreach (var type in typeCollector.CollectConcreteTypes<IWindowsService>())
 			{
 				Console.WriteLine("Uninstalling {0} from assembly {1}...", type.Name, type.Assembly.FullName);
 				WindowsServiceInstaller.RuntimeUninstall(type.Assembly, type);
@@ -34,9 +36,10 @@
 
 		public void RunServices(IEnumerable<String> assemblies, IEnumerable<String> typeNames)
 		{
+			var typeCollector = new TypeCollector(assemblies, typeNames);
 			var serviceGroup = new WindowsServiceGroup();
 
-			foreach (var type in CollectServiceTypes(assemblies, typeNames))
+			foreach (var type in typeCollector.CollectConcreteTypes<IWindowsService>())
 			{
 				var service = Activator.CreateInstance(type) as IWindowsService;
 
@@ -52,43 +55,6 @@
 				ConsoleHarness.Run(new String[] { }, serviceGroup);
 			else
 				ServiceBase.Run(new WindowsServiceHarness(serviceGroup));
-		}
-
-		private static IEnumerable<Type> CollectServiceTypes(IEnumerable<String> assemblies, IEnumerable<String> typeNames)
-		{
-			var foundTypes = new List<Type>();
-
-			foreach (var assemblyPath in assemblies)
-			{
-				Assembly assembly = Assembly.LoadFile(Path.GetFullPath(assemblyPath));
-
-				var serviceTypes = assembly.GetExportedTypes()
-					.Where(t => t.GetInterfaces().Contains(typeof(IWindowsService)))
-					.Where(t => t.IsClass && !t.IsAbstract);
-
-				if (!serviceTypes.Any())
-					throw new InvalidOperationException("Unable to find IWindowsService implementors in assembly " + assemblyPath);
-
-				if (typeNames != null)
-					serviceTypes = serviceTypes.Where(t => typeNames.Contains(t.Name) || (t.FullName != null && typeNames.Contains(t.FullName)));
-
-				foundTypes.AddRange(serviceTypes);
-			}
-
-			if (typeNames != null && foundTypes.Count != typeNames.Count())
-			{
-				var names = foundTypes.Select(t => t.Name);
-				var fullNames = foundTypes.Select(t => t.FullName);
-
-				throw new InvalidOperationException("Unable to find service type(s): " + String.Join(", ", typeNames.Where(name => !names.Contains(name) && !fullNames.Contains(name))));
-			}
-
-			return foundTypes;
-		}
-
-		private static Assembly CurrentDomainAssemblyResolve(Object sender, ResolveEventArgs args)
-		{
-			return Assembly.Load(args.Name);
 		}
 	}
 }
