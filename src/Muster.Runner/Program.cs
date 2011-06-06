@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Reflection;
 	using Mono.Options;
 
@@ -14,6 +15,7 @@
 			Boolean install = false;
 			Boolean uninstall = false;
 			String[] typeNames = null;
+			String configPath = null;
 			Boolean showHelp = false;
 
 			var options = new OptionSet
@@ -21,6 +23,7 @@
 				{ "i|install", "Install the specified service(s)", v => install = v != null },
 				{ "u|uninstall", "Uninstall the specified service(s)", v => uninstall = v != null },
 				{ "t|types=", "Comma-separated list of individual service types", v => typeNames = v.Split(',') },
+				{ "c|config=", "Path to service configuration file", v => configPath = v },
 				{ "h|help", "Show this message and exit", v => showHelp = v != null },
 			};
 
@@ -46,7 +49,7 @@
 			if (install && uninstall)
 				Die("Cannot install and uninstall at the same time.");
 
-			var serviceAppDomain = CreateServiceAppDomain();
+			var serviceAppDomain = CreateServiceAppDomain(configPath);
 
 			Type serviceRunnerType = typeof(ServiceRunner);
 			var serviceRunner = (ServiceRunner)serviceAppDomain.CreateInstanceAndUnwrap(serviceRunnerType.Assembly.FullName, serviceRunnerType.FullName);
@@ -73,9 +76,12 @@
 			}
 		}
 
-		static AppDomain CreateServiceAppDomain()
+		static AppDomain CreateServiceAppDomain(String configPath)
 		{
 			var setup = new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory };
+
+			if (configPath != null)
+				setup.ConfigurationFile = Path.GetFullPath(configPath);
 
 			return AppDomain.CreateDomain("MusterServiceAppDomain", null, setup);
 		}

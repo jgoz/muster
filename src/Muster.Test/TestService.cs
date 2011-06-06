@@ -1,12 +1,13 @@
 ﻿namespace Muster.Test
 {
 	using System;
+	using System.Configuration;
 
 	public class TestService : IWindowsService
 	{
 		public void OnStart(string[] args)
 		{
-			Console.WriteLine("We are starting in {0}.", AppDomain.CurrentDomain.FriendlyName);
+			Console.WriteLine("We are starting in {0}. SomeText: {1}", AppDomain.CurrentDomain.FriendlyName, ConfigurationManager.AppSettings["SomeText"]);
 		}
 
 		public void OnStop()

@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -44,9 +45,13 @@
       <Name>Muster</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Test.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y $(TargetFileName) ..\..\..\Muster.Runner\$(OutDir)$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y $(TargetFileName) ..\..\..\Muster.Runner\$(OutDir)$(TargetFileName)
+xcopy /Y ..\..\Test.config ..\..\..\Muster.Runner\$(OutDir)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
