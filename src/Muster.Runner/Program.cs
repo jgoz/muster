@@ -80,7 +80,8 @@
 		{
 			var setup = new AppDomainSetup
 			{
-				ApplicationBase = Environment.CurrentDirectory,
+				ApplicationBase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+				PrivateBinPath = Environment.CurrentDirectory + ";" + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + ";",
 				ShadowCopyDirectories = Environment.CurrentDirectory + ";",
 				CachePath = Path.Combine(Environment.CurrentDirectory, "Shadow"),
 				ShadowCopyFiles = "true"
