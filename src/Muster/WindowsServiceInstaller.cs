@@ -94,7 +94,7 @@
 			{
 				ti.Installers.Add(new WindowsServiceInstaller(serviceType));
 				ti.Context = new InstallContext(null, new[] { path });
-				ti.Uninstall(new Hashtable());
+				ti.Uninstall(null);
 			}
 		}
 
