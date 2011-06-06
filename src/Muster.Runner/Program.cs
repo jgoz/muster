@@ -78,7 +78,13 @@
 
 		static AppDomain CreateServiceAppDomain(String configPath)
 		{
-			var setup = new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory };
+			var setup = new AppDomainSetup
+			{
+				ApplicationBase = Environment.CurrentDirectory,
+				ShadowCopyDirectories = Environment.CurrentDirectory + ";",
+				CachePath = Path.Combine(Environment.CurrentDirectory, "Shadow"),
+				ShadowCopyFiles = "true"
+			};
 
 			if (configPath != null)
 				setup.ConfigurationFile = Path.GetFullPath(configPath);
