@@ -9,6 +9,7 @@
 	{
 		/// <summary>
 		/// Called when the service gets a request to start.
+		/// This method must not block the calling thread.
 		/// </summary>
 		/// <param name="args">Any startup arguments required by the service.</param>
 		void OnStart(String[] args);
@@ -20,6 +21,7 @@
 
 		/// <summary>
 		/// Called when a service gets a request to pause, but not stop completely.
+		/// This method must not block the calling thread.
 		/// </summary>
 		void OnPause();
 
