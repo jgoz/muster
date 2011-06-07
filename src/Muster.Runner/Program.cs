@@ -71,6 +71,8 @@
 				}
 
 				serviceRunner.RunServices(assemblies, typeNames);
+
+				AppDomain.Unload(serviceAppDomain);
 			}
 			catch (TargetInvocationException ex)
 			{
