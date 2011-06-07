@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muster.Runner", "Muster.Run
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muster.Test", "Muster.Test\Muster.Test.csproj", "{1DED7D39-88AF-48CD-9170-FBD505951C3B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{9FAFE4D0-F555-438D-BF93-71A1F69D3500}"
+	ProjectSection(SolutionItems) = preProject
+		Indentation.vssettings = Indentation.vssettings
+		Muster.5.1.ReSharper = Muster.5.1.ReSharper
+		Settings.FxCop = Settings.FxCop
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
