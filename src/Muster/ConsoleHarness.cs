@@ -18,15 +18,18 @@
 		{
 			ServiceState state = ServiceState.Running;
 
-			service.OnStart(args);
-
-			while (state != ServiceState.Stopped)
+			using (service)
 			{
-				Console.WriteLine("Currently {0}. [Q]uit, [P]ause, [R]esume: ", state);
-				TryHandleConsoleInput(service, Console.ReadKey(true).Key, ref state);
-			}
+				service.OnStart(args);
 
-			service.OnStop();
+				while (state != ServiceState.Stopped)
+				{
+					Console.WriteLine("Currently {0}. [Q]uit, [P]ause, [R]esume: ", state);
+					TryHandleConsoleInput(service, Console.ReadKey(true).Key, ref state);
+				}
+
+				service.OnStop();
+			}
 		}
 
 		private static void TryHandleConsoleInput(IWindowsService service, ConsoleKey key, ref ServiceState state)
