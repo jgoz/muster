@@ -50,6 +50,8 @@
 				Die("Cannot install and uninstall at the same time.");
 
 			var serviceAppDomain = CreateServiceAppDomain(configPath);
+			if (!File.Exists(configPath))
+				Die("Config file not found: {0}", configPath);
 
 			Type serviceRunnerType = typeof(ServiceRunner);
 			var serviceRunner = (ServiceRunner)serviceAppDomain.CreateInstanceAndUnwrap(serviceRunnerType.Assembly.FullName, serviceRunnerType.FullName);
@@ -70,6 +72,10 @@
 
 				serviceRunner.RunServices(assemblies, typeNames);
 			}
+			catch (TargetInvocationException ex)
+			{
+				Die(ex.InnerException.Message);
+			}
 			catch (Exception ex)
 			{
 				Die(ex.Message);
@@ -78,14 +84,13 @@
 
 		static AppDomain CreateServiceAppDomain(String configPath)
 		{
-			var setup = new AppDomainSetup
-			{
-				ApplicationBase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-				PrivateBinPath = Environment.CurrentDirectory + ";" + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + ";",
-				ShadowCopyDirectories = Environment.CurrentDirectory + ";",
-				CachePath = Path.Combine(Environment.CurrentDirectory, "Shadow"),
-				ShadowCopyFiles = "true"
-			};
+			var setup = AppDomain.CurrentDomain.SetupInformation;
+
+			setup.ApplicationBase = Environment.CurrentDirectory;
+
+			setup.CachePath = Path.Combine(Environment.CurrentDirectory, ".shadow");
+			setup.ShadowCopyDirectories = null;
+			setup.ShadowCopyFiles = "true";
 
 			if (configPath != null)
 				setup.ConfigurationFile = Path.GetFullPath(configPath);
