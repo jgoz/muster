@@ -49,12 +49,12 @@
 			if (install && uninstall)
 				Die("Cannot install and uninstall at the same time.");
 
-			var serviceAppDomain = CreateServiceAppDomain(configPath);
 			if (!File.Exists(configPath))
 				Die("Config file not found: {0}", configPath);
 
-			Type serviceRunnerType = typeof(ServiceRunner);
-			var serviceRunner = (ServiceRunner)serviceAppDomain.CreateInstanceAndUnwrap(serviceRunnerType.Assembly.FullName, serviceRunnerType.FullName);
+			AppDomain serviceAppDomain = CreateServiceAppDomain(configPath);
+
+			var serviceRunner = (ServiceRunner)serviceAppDomain.CreateInstanceFromAndUnwrap(Assembly.GetExecutingAssembly().Location, typeof(ServiceRunner).FullName);
 
 			try
 			{

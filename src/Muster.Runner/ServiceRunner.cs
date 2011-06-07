@@ -2,16 +2,10 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Reflection;
 	using System.ServiceProcess;
 
 	public class ServiceRunner : MarshalByRefObject
 	{
-		public ServiceRunner()
-		{
-			AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => Assembly.Load(args.Name);
-		}
-
 		public void InstallServices(IEnumerable<String> assemblies, IEnumerable<String> typeNames)
 		{
 			var typeCollector = new TypeCollector(assemblies, typeNames);

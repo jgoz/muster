@@ -28,9 +28,9 @@
 
 			foreach (var assemblyPath in _assemblies)
 			{
-				Assembly assembly = Assembly.LoadFile(Path.GetFullPath(assemblyPath));
+				Assembly assembly = Assembly.Load(AssemblyName.GetAssemblyName(Path.GetFullPath(assemblyPath)));
 
-				var serviceTypes = assembly.GetExportedTypes()
+				var serviceTypes = assembly.GetTypes()
 					.Where(t => t.GetInterfaces().Contains(typeof(T)))
 					.Where(t => t.IsClass && !t.IsAbstract);
 
