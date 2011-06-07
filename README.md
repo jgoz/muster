@@ -1,6 +1,7 @@
 # Muster
 > [**muhs**-ter]
 > &mdash;_(verb)_ to assemble, as for orders, battle, etc.
+>
 > &mdash;_(verb phrase)_ **muster in**, to enlist into service (in the armed forces).
 
 Muster is a .NET (4.0) project aimed at simplifying most aspects of Windows Services &mdash; debugging, testing and deploying.
@@ -13,8 +14,6 @@ The core project, Muster, is a service abstraction layer and harnesses (console/
 
 The runner project, Muster.Runner or `musterin`, is a console application that can run or install services found in arbitrary assemblies.
 
-More documentation will follow. This project is currently considered unstable and not suitable for production use.
-
-This project, including the bundled Mono.Options source, is licenced under the [MIT licence][mit].
+More documentation will follow. This project is currently considered unstable and not suitable for production use. This project, including the bundled Mono.Options source, is licenced under the [MIT licence][mit].
 
 [mit]: http://www.opensource.org/licenses/mit-license.html
