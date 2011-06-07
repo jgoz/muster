@@ -1,7 +1,6 @@
 # Muster
-> [**muhs**-ter]
-> &mdash;_(verb)_ to assemble, as for orders, battle, etc.
->
+> [**muhs**-ter]  
+> &mdash;_(verb)_ to assemble, as for orders, battle, etc.  
 > &mdash;_(verb phrase)_ **muster in**, to enlist into service (in the armed forces).
 
 Muster is a .NET (4.0) project aimed at simplifying most aspects of Windows Services &mdash; debugging, testing and deploying.
