@@ -1,6 +1,7 @@
 ﻿namespace Muster
 {
 	using System;
+	using System.Threading;
 
 	/// <summary>
 	/// Run a service from the console given a service implementation
@@ -25,6 +26,9 @@
 				while (state != ServiceState.Stopped)
 				{
 					Console.WriteLine("[muster] Currently {0}: [Q]uit [P]ause [R]esume", state);
+
+					while (!Console.KeyAvailable)
+						Thread.Sleep(250);
 
 					TryHandleConsoleInput(service, Console.ReadKey(true).Key, ref state);
 				}
