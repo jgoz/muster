@@ -24,7 +24,8 @@
 
 				while (state != ServiceState.Stopped)
 				{
-					Console.WriteLine("Currently {0}. [Q]uit, [P]ause, [R]esume: ", state);
+					Console.WriteLine("[muster] Currently {0}: [Q]uit [P]ause [R]esume", state);
+
 					TryHandleConsoleInput(service, Console.ReadKey(true).Key, ref state);
 				}
 
