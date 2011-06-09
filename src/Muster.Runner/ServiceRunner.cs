@@ -41,6 +41,8 @@
 					throw new InvalidOperationException(String.Format("Unable to instantiate {0} from assembly {1}", type.Name, type.Assembly.FullName));
 
 				serviceGroup.Add(service);
+
+				Console.WriteLine("[muster] Found {0} in {1}", type.Name, type.Assembly.GetName().Name);
 			}
 
 			// TODO: Service params?
