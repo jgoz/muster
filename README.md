@@ -16,3 +16,9 @@ The runner project, Muster.Runner or `musterin`, is a console application that c
 More documentation will follow. This project is currently considered unstable and not suitable for production use. This project, including the bundled Mono.Options source, is licenced under the [MIT licence][mit].
 
 [mit]: http://www.opensource.org/licenses/mit-license.html
+
+## TODO
+* Use real logging strategy (NLog?)
+* Automatically reload AppDomain upon changes to target assemblies
+* Nuget
+* [WebActivator](https://bitbucket.org/davidebbo/webactivator/overview) harness
