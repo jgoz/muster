@@ -15,6 +15,11 @@
 			Stopped
 		}
 
+		/// <summary>
+		/// Run a given <see cref="IWindowsService"/> using the console harness.
+		/// </summary>
+		/// <param name="args">Arguments to pass to the service <see cref="IWindowsService.OnStart"/> method.</param>
+		/// <param name="service">The service to run.</param>
 		public static void Run(String[] args, IWindowsService service)
 		{
 			ServiceState state = ServiceState.Running;
