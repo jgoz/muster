@@ -25,10 +25,19 @@ mkdir "output\lib"
 echo === COMPILING ===
 echo Compiling / Target: %FRAMEWORK_VERSION% / Config: %TARGET_CONFIG%
 msbuild /nologo /verbosity:quiet src\Muster.sln /p:Configuration=%TARGET_CONFIG% /t:Clean
-msbuild /nologo /verbosity:quiet src\Muster.Runner\Muster.Runner.csproj /p:Configuration=%TARGET_CONFIG% /p:TargetFrameworkVersion=%FRAMEWORK_VERSION% /p:OutputPath=..\..\output\bin
+msbuild /nologo /verbosity:quiet src\Muster.sln /p:Configuration=%TARGET_CONFIG% /p:TargetFrameworkVersion=%FRAMEWORK_VERSION%
 
-echo Building Standalone Assembly
-msbuild /nologo /verbosity:quiet src\Muster\Muster.csproj /p:Configuration=%TARGET_CONFIG% /p:TargetFrameworkVersion=%FRAMEWORK_VERSION% /p:OutputPath=..\..\output\lib
+xcopy /Q /Y src\Muster\bin\%TARGET_CONFIG%\*.* output\lib
+
+echo .xml >> exclude.txt
+xcopy /Q /Y /EXCLUDE:exclude.txt src\Muster\bin\%TARGET_CONFIG%\*.* output\bin
+
+echo .vshost.exe >> exclude.txt
+echo .manifest >> exclude.txt
+echo .config >> exclude.txt
+xcopy /Q /Y /EXCLUDE:exclude.txt src\Muster.Runner\bin\%TARGET_CONFIG%\*.* output\bin
+
+del exclude.txt
 
 echo.
 echo === FINALIZING ===
