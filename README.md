@@ -22,6 +22,7 @@ To compile, run `build.cmd`. To package, run `package.cmd`.
 More documentation will follow. This project is currently considered unstable and not suitable for production use. This project, including the bundled Mono.Options source, is licenced under the [MIT licence][mit].
 
 [ilmerge]: http://research.microsoft.com/en-us/people/mbarnett/ilmerge.aspx
+[7za]: http://www.7-zip.org/download.html
 [mit]: http://www.opensource.org/licenses/mit-license.html
 
 ## TODO
