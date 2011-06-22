@@ -14,6 +14,8 @@
     <tags>services, windows, console</tags>
   </metadata>
   <files>
+    <file src="publish-v4.0\bin\Muster.dll" target="bin\net40"/>
+    <file src="publish-v4.0\bin\Muster.pdb" target="bin\net40"/>
     <file src="publish-v4.0\bin\musterin.exe" target="bin\net40"/>
     <file src="publish-v4.0\bin\musterin.pdb" target="bin\net40"/>
     <file src="publish-v4.0\lib\Muster.dll" target="lib\net40"/>
