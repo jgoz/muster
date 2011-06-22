@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{9F
 	ProjectSection(SolutionItems) = preProject
 		Indentation.vssettings = Indentation.vssettings
 		Muster.5.1.ReSharper = Muster.5.1.ReSharper
+		nuget.config = nuget.config
 		Settings.FxCop = Settings.FxCop
 		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
@@ -23,6 +24,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6D4CA5FE-5DD3-4777-953C-4A7ED86F4CFC}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.cmd = ..\build.cmd
+		..\muster.nuspec = ..\muster.nuspec
+		..\package.cmd = ..\package.cmd
 	EndProjectSection
 EndProject
 Global

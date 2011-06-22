@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>muster</id>
+    <version>0.1</version>
+    <title>Muster</title>
+    <authors>Johnny Gozde</authors>
+    <owners>Johnny Gozde</owners>
+    <projectUrl>https://github.com/jgoz/muster</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Muster is a .NET (4.0) project aimed at simplifying most aspects of Windows Services: debugging, testing and deploying. It includes a service abstraction layer and a console runner/installer wrapper.</description>
+    <summary>Muster is a Windows Service abstraction layer with console runner/installer.</summary>
+    <language>es-US</language>
+    <tags>services, windows, console</tags>
+  </metadata>
+  <files>
+    <file src="publish-v4.0\bin\musterin.exe" target="bin\net40"/>
+    <file src="publish-v4.0\bin\musterin.pdb" target="bin\net40"/>
+    <file src="publish-v4.0\lib\Muster.dll" target="lib\net40"/>
+    <file src="publish-v4.0\lib\Muster.pdb" target="lib\net40"/>
+    <file src="publish-v4.0\lib\Muster.xml" target="lib\net40"/>
+  </files>
+</package>
