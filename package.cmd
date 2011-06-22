@@ -1,14 +1,5 @@
 @echo off
 
-for /F %%M in ('where 7za') do set ZIP_EXE=%%M
-where /Q 7za
-if errorlevel 1 (goto zipnotfound) else (goto start)
-
-:zipnotfound
-echo '7za.exe' is not available on the system path
-goto done
-
-:start
 set NUGET_EXE=bin\nuget-bin\nuget.exe
 set NUGET_BOOTSTRAPPER_EXE=bin\nuget-bin\nuget-bootstrap.exe
 
@@ -33,9 +24,6 @@ if exist package ( rmdir /s /q package )
 mkdir package
 
 call build.cmd
-cd publish-v4.0
-%ZIP_EXE% a -mx9 -r -y "..\package\Muster-%VERSION%.%BUILD%-net40.zip" *.*
-cd ..
 
 %NUGET_EXE% Pack muster.nuspec -Version %VERSION%.%BUILD% -OutputDirectory package
 
