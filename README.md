@@ -13,8 +13,15 @@ The core project, Muster, is a service abstraction layer and harnesses (console/
 
 The runner project, Muster.Runner or `musterin`, is a console application that can run or install services found in arbitrary assemblies.
 
+## Compiling and packaging
+* The Muster build script requires [ILMerge][ilmerge] to be on the system path.
+* The NuGet packaging script requires [7za][7za] to be on the system path.
+
+To compile, run `build.cmd`. To package, run `package.cmd`.
+
 More documentation will follow. This project is currently considered unstable and not suitable for production use. This project, including the bundled Mono.Options source, is licenced under the [MIT licence][mit].
 
+[ilmerge]: http://research.microsoft.com/en-us/people/mbarnett/ilmerge.aspx
 [mit]: http://www.opensource.org/licenses/mit-license.html
 
 ## TODO
