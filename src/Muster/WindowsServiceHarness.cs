@@ -38,26 +38,42 @@
 		/// </summary>
 		public IWindowsService ServiceImplementation { get { return _service; } }
 
+		/// <summary>
+		/// Handle the service 'Start' event.
+		/// </summary>
+		/// <param name="args">Arguments passed to the service.</param>
 		protected override void OnStart(String[] args)
 		{
 			_service.OnStart(args);
 		}
 
+		/// <summary>
+		/// Handle the service 'Stop' event.
+		/// </summary>
 		protected override void OnStop()
 		{
 			_service.OnStop();
 		}
 
+		/// <summary>
+		/// Handle the service 'Pause' event.
+		/// </summary>
 		protected override void OnPause()
 		{
 			_service.OnPause();
 		}
 
+		/// <summary>
+		/// Handle the service 'Continue' event.
+		/// </summary>
 		protected override void OnContinue()
 		{
 			_service.OnContinue();
 		}
 
+		/// <summary>
+		/// Handle the service 'Shutdown' event, which occurs on system shutdown.
+		/// </summary>
 		protected override void OnShutdown()
 		{
 			_service.OnShutdown();
