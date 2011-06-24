@@ -24,5 +24,5 @@ More documentation will follow. This project is currently considered unstable an
 ## TODO
 * Use real logging strategy (NLog?)
 * Automatically reload AppDomain upon changes to target assemblies
-* Nuget
+* <del>Nuget</del>
 * [WebActivator](https://bitbucket.org/davidebbo/webactivator/overview) harness
