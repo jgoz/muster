@@ -7,17 +7,22 @@
     <authors>Johnny Gozde</authors>
     <owners>Johnny Gozde</owners>
     <projectUrl>https://github.com/jgoz/muster</projectUrl>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.html</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Muster is a .NET (4.0) project aimed at simplifying most aspects of Windows Services: debugging, testing and deploying. It includes a service abstraction layer and a console runner/installer wrapper.</description>
     <summary>Muster is a Windows Service abstraction layer with console runner/installer.</summary>
     <language>en-US</language>
-    <tags>services, windows, console</tags>
+    <tags>services windows console</tags>
   </metadata>
   <files>
-    <file src="publish-v4.0\bin\muster.exe" target="bin"/>
-    <file src="publish-v4.0\bin\muster.pdb" target="bin"/>
-    <file src="publish-v4.0\lib\Muster.dll" target="lib\net40"/>
-    <file src="publish-v4.0\lib\Muster.pdb" target="lib\net40"/>
-    <file src="publish-v4.0\lib\Muster.xml" target="lib\net40"/>
+    <file src="publish-v4.0\bin\*.exe" target="bin"/>
+    <file src="publish-v4.0\bin\*.pdb" target="bin"/>
+    <file src="publish-v4.0\bin\*.dll" target="bin"/>
+
+    <file src="publish-v4.0\lib\*.dll" target="lib\net40"/>
+    <file src="publish-v4.0\lib\*.pdb" target="lib\net40"/>
+    <file src="publish-v4.0\lib\*.xml" target="lib\net40"/>
+
+    <file src="src\**\*.cs" target="src" />
   </files>
 </package>

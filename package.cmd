@@ -26,7 +26,7 @@ mkdir package
 
 call build.cmd
 
-%NUGET_EXE% Pack muster.nuspec -Version %VERSION%.%REVISION% -OutputDirectory package
+%NUGET_EXE% Pack muster.nuspec -Version %VERSION%.%REVISION% -OutputDirectory package -Symbols
 
 rmdir /s /q publish-v4.0
 
