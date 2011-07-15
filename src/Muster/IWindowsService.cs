@@ -27,6 +27,7 @@
 
 		/// <summary>
 		/// Called when a service gets a request to resume from a paused state.
+		/// This method must not block the calling thread.
 		/// </summary>
 		void OnContinue();
 
