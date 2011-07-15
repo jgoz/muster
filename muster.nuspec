@@ -7,6 +7,7 @@
     <authors>Johnny Gozde</authors>
     <owners>Johnny Gozde</owners>
     <projectUrl>https://github.com/jgoz/muster</projectUrl>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.html</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Muster is a .NET (4.0) project aimed at simplifying most aspects of Windows Services: debugging, testing and deploying. It includes a service abstraction layer and a console runner/installer wrapper.</description>
     <summary>Muster is a Windows Service abstraction layer with console runner/installer.</summary>
