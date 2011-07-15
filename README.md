@@ -110,6 +110,20 @@ This allows specifying which services will actually run. The argument should be 
 #### Config
 This allows specifying a configuration file to be used as the `App.config` equivalent for all running services. All services must currently share the same configuration file.
 
+### Debugging in Visual Studio
+During development, Muster allow you to debug into your services from within Visual Studio. Here's how:
+
+1. (Optional) Set your service project as a StartUp Project
+2. In the Project Properties -> Debug tab, select "Start external program"
+3. Enter the path to `muster-run.exe`
+    * If it's installed on the system path, the executable name is enough
+    * If you're using the [NuGet package][nuget-pkg], you can specify a relative path. E.g.  
+    `..\..\packages\muster.X.Y.Z\bin\muster-run.exe`
+4. Set the "Command line arguments" field to the filename of your service assembly. You can add any additional command line options here too, like the configuration file path. E.g.  
+    `-c ..\..\MyService.config MyService.dll`
+
+Now when you run your project, the Muster console runner will start running all of the services defined in your project.
+
 ## Compiling and packaging
 To compile, run `build.cmd`. To create a NuGet package, run `package.cmd`.
 
