@@ -11,7 +11,7 @@
     <description>Muster is a .NET (4.0) project aimed at simplifying most aspects of Windows Services: debugging, testing and deploying. It includes a service abstraction layer and a console runner/installer wrapper.</description>
     <summary>Muster is a Windows Service abstraction layer with console runner/installer.</summary>
     <language>en-US</language>
-    <tags>services, windows, console</tags>
+    <tags>services windows console</tags>
   </metadata>
   <files>
     <file src="publish-v4.0\bin\muster.exe" target="bin"/>
