@@ -73,7 +73,7 @@ public class TestService : IWindowsService
 }
 ```
 
-## Using `muster-run`, the console runner
+## Using muster-run, the console runner
 The Muster console runner enables `IWindowsService` implementations to be run from the console without needing to be installed, which can greatly simplify the development/testing cycle. The runner also provides a convenient way to install and uninstall services on the local machine.
 
 Assuming `muster-run.exe` is on the system path and `MyService.dll` contains an `IWindowsService`, the following command is enough to get started:
