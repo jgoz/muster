@@ -81,7 +81,7 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ServiceRunner.cs" />
+    <Compile Include="ServiceHandler.cs" />
     <Compile Include="TypeCollector.cs" />
     <Compile Include="WindowsServiceGroup.cs" />
     <Compile Include="Options.cs" />

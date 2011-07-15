@@ -4,7 +4,7 @@
 	using System.Collections.Generic;
 	using System.ServiceProcess;
 
-	public class ServiceRunner : MarshalByRefObject
+	public class ServiceHandler : MarshalByRefObject
 	{
 		public void InstallServices(IEnumerable<String> assemblies, IEnumerable<String> typeNames)
 		{
