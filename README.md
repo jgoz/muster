@@ -11,10 +11,12 @@ The core project, Muster, is a service abstraction layer and harnesses (console/
 [p2]:http://geekswithblogs.net/BlackRabbitCoder/archive/2010/10/07/c-windows-services-2-of-2-self-installing-windows-service-template.aspx 
 [blog]: http://geekswithblogs.net/BlackRabbitCoder/Default.aspx 
 
-The runner project, Muster.Runner or `musterin`, is a console application that can run or install services found in arbitrary assemblies.
+The runner project, Muster.Runner or `muster.exe`, is a console application that can run or install services found in arbitrary assemblies.
 
 ## Compiling and packaging
 To compile, run `build.cmd`. To create a NuGet package, run `package.cmd`.
+
+* Muster depends on [ILMerge][ilmerge] being located on the system path in order to build and package the assembly.
 
 More documentation will follow. This project is currently considered unstable and not suitable for production use. This project, including the bundled Mono.Options source, is licenced under the [MIT licence][mit].
 
@@ -22,7 +24,7 @@ More documentation will follow. This project is currently considered unstable an
 [mit]: http://www.opensource.org/licenses/mit-license.html
 
 ## TODO
-* Use real logging strategy (NLog?)
+* Use real logging strategy (Common.Logging?)
 * Automatically reload AppDomain upon changes to target assemblies
 * <del>Nuget</del>
 * [WebActivator](https://bitbucket.org/davidebbo/webactivator/overview) harness

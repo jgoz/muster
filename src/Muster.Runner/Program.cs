@@ -54,32 +54,34 @@
 
 			AppDomain serviceAppDomain = CreateServiceAppDomain(configPath);
 
-			var serviceRunner = (ServiceRunner)serviceAppDomain.CreateInstanceFromAndUnwrap(Assembly.GetExecutingAssembly().Location, typeof(ServiceRunner).FullName);
+			var serviceHandler = (ServiceHandler)serviceAppDomain.CreateInstanceFromAndUnwrap(Assembly.GetExecutingAssembly().Location, typeof(ServiceHandler).FullName);
 
 			try
 			{
 				if (install)
 				{
-					serviceRunner.InstallServices(assemblies, typeNames);
+					serviceHandler.InstallServices(assemblies, typeNames);
 					return;
 				}
 
 				if (uninstall)
 				{
-					serviceRunner.UninstallServices(assemblies, typeNames);
+					serviceHandler.UninstallServices(assemblies, typeNames);
 					return;
 				}
 
-				serviceRunner.RunServices(assemblies, typeNames);
+				serviceHandler.RunServices(assemblies, typeNames);
 
 				AppDomain.Unload(serviceAppDomain);
 			}
 			catch (TargetInvocationException ex)
 			{
+				Console.WriteLine(ex);
 				Die(ex.InnerException.Message);
 			}
 			catch (Exception ex)
 			{
+				Console.WriteLine(ex);
 				Die(ex.Message);
 			}
 		}
