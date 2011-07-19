@@ -3,12 +3,14 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 	using System.Reflection;
 	using Mono.Options;
 
 	class Program
 	{
 		private static readonly String ProcessName = Assembly.GetExecutingAssembly().GetName().Name;
+		private static readonly List<String> BinPath = new List<String>();
 
 		static void Main(String[] args)
 		{
@@ -24,6 +26,7 @@
 				{ "u|uninstall", "Uninstall the specified service(s)", v => uninstall = v != null },
 				{ "t|types=", "Comma-separated list of individual service types", v => typeNames = v.Split(',') },
 				{ "c|config=", "Path to service configuration file", v => configPath = v },
+				{ "p|bin-path=", "Additional path to search for dependent assemblies", v => BinPath.AddRange(v.Split(';')) },
 				{ "h|help", "Show this message and exit", v => showHelp = v != null },
 			};
 
@@ -53,6 +56,7 @@
 				Die("Config file not found: {0}", configPath);
 
 			AppDomain serviceAppDomain = CreateServiceAppDomain(configPath);
+			serviceAppDomain.AssemblyResolve += (sender, e) => ResolveAssembly(e);
 
 			var serviceHandler = (ServiceHandler)serviceAppDomain.CreateInstanceFromAndUnwrap(Assembly.GetExecutingAssembly().Location, typeof(ServiceHandler).FullName);
 
@@ -100,6 +104,22 @@
 				setup.ConfigurationFile = Path.GetFullPath(configPath);
 
 			return AppDomain.CreateDomain("MusterServiceAppDomain", null, setup);
+		}
+
+		static Assembly ResolveAssembly(ResolveEventArgs args)
+		{
+			foreach (String fullPath in BinPath.Select(Path.GetFullPath))
+			{
+				// TODO: Try other extensions?
+				String assemblyFileName = new AssemblyName(args.Name).Name + ".dll";
+
+				Assembly assembly = Assembly.LoadFrom(Path.Combine(fullPath, assemblyFileName));
+
+				if (assembly != null)
+					return assembly;
+			}
+
+			return null;
 		}
 
 		static void ShowHelp(OptionSet options)
