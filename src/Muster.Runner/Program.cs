@@ -10,7 +10,7 @@
 	class Program
 	{
 		private static readonly String ProcessName = Assembly.GetExecutingAssembly().GetName().Name;
-		private static readonly List<String> BinPath = new List<String>();
+		private static readonly List<String> BinPath = new List<String> { "." };
 
 		static void Main(String[] args)
 		{
@@ -56,7 +56,7 @@
 				Die("Config file not found: {0}", configPath);
 
 			AppDomain serviceAppDomain = CreateServiceAppDomain(configPath);
-			serviceAppDomain.AssemblyResolve += (sender, e) => ResolveAssembly(e);
+			AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
 			var serviceHandler = (ServiceHandler)serviceAppDomain.CreateInstanceFromAndUnwrap(Assembly.GetExecutingAssembly().Location, typeof(ServiceHandler).FullName);
 
@@ -106,8 +106,14 @@
 			return AppDomain.CreateDomain("MusterServiceAppDomain", null, setup);
 		}
 
-		static Assembly ResolveAssembly(ResolveEventArgs args)
+		static Assembly ResolveAssembly(Object sender, ResolveEventArgs args)
 		{
+			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+			{
+				if (assembly.FullName == args.Name)
+					return assembly;
+			}
+
 			foreach (String fullPath in BinPath.Select(Path.GetFullPath))
 			{
 				// TODO: Try other extensions?
